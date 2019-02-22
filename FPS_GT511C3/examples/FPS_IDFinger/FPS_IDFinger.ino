@@ -25,8 +25,17 @@ void Enroll()
  //Fstatus == LOW;
   // Enroll test
   // find open enroll id
-  if ( fps.IsPressFinger() ) 
+  if ( fps.IsPressFinger()) 
   {
+    Serial.println("Finger toh hai lekin tu ADMin h kya nhi check krne de...");
+    fps.CaptureFinger(false);
+    int id1 = fps.Identify1_N();
+    if( id1 ==  0  )
+    {
+      Serial.println("HI Admin...aaaj kisko add krega?");
+      while(fps.IsPressFinger() == true) delay(100);
+       fps.SetLED(false);
+       delay(300);
   int enrollid = 0;
   bool okid = false;
   while ( okid == false )
@@ -39,6 +48,7 @@ void Enroll()
       //Serial.println(enrollid);
       }
   }
+  fps.SetLED(true);
   fps.EnrollStart(enrollid);
   // enroll
   Serial.print("Press finger to Enroll #");
@@ -69,6 +79,14 @@ void Enroll()
         if (iret == 0)
         {
           Serial.println("Enrolling Successfull");
+          int i=0;
+          for(i=0;i<=10;i++)
+          {
+            delay(10);
+            fps.SetLED(false);
+            delay(10);
+            fps.SetLED(true);
+            }
         }
         else
         {
@@ -81,6 +99,10 @@ void Enroll()
     else Serial.println("Failed to capture second finger");
   }
   else Serial.println("Failed to capture first finger");
+  }
+  else
+  {Serial.print("Tu admin nhi h chutiye");
+   Serial.println(id1);}
   }
 fps.SetLED(false);
 }
