@@ -4,8 +4,8 @@
 #include <WiFiClient.h> 
 #include <ESP8266WebServer.h>
 #include <Servo.h>
-const char *ssid = "test";
-const char *password = "password";
+const char *ssid = "padlock";
+const char *password = "padlock";
 IPAddress myIP;
 Servo myservo;
 ESP8266WebServer server(80);
